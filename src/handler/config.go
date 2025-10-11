@@ -33,5 +33,6 @@ func (h *BaseHandler) RegisterSystemConfiguration(
 		log.Fatalf("Không thể đăng ký handler: %v", err)
 	}
 
+	router.Any("/system-configurations", gin.WrapH(grpcMux))
 	router.Any("/system-configurations/*path", gin.WrapH(grpcMux))
 }

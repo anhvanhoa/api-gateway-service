@@ -33,5 +33,6 @@ func (h *BaseHandler) RegisterIoTDevice(
 	}
 
 	// Đăng ký gRPC gateway vào Gin router
+	router.Any("/iot-devices", gin.WrapH(grpcMux))
 	router.Any("/iot-devices/*path", gin.WrapH(grpcMux))
 }
