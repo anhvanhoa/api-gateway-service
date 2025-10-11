@@ -14,12 +14,13 @@ func main() {
 	defer cancel()
 
 	// Tạo Gin router
-	router := gin.Default()
+	router := gin.New()
 	router.Use(gin.Recovery())
 	router.Use(gin.Logger())
 	// Tạo handler và đăng ký routes
 	handler := handler.NewBaseHandler()
 	handler.RegisterIoTDevice(ctx, router)
+	handler.RegisterSystemConfiguration(ctx, router)
 
 	fmt.Println("API Gateway running on http://localhost:8080")
 	router.Run(":8080")

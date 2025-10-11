@@ -3,7 +3,8 @@ module api-gateway
 go 1.25.0
 
 require (
-	github.com/anhvanhoa/sf-proto v0.0.0-20251011031720-ca2be76ae2fe
+	github.com/anhvanhoa/sf-proto v0.0.0-20251011005449-80f7bd3e77be
+	github.com/gin-gonic/gin v1.11.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
 	google.golang.org/grpc v1.75.1
 )
@@ -15,7 +16,6 @@ require (
 	github.com/cloudwego/base64x v0.1.6 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
 	github.com/gin-contrib/sse v1.1.0 // indirect
-	github.com/gin-gonic/gin v1.11.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.27.0 // indirect

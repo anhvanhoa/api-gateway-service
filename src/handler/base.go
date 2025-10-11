@@ -11,6 +11,10 @@ type Handler interface {
 		ctx context.Context,
 		router *gin.Engine,
 	)
+	RegisterSystemConfiguration(
+		ctx context.Context,
+		router *gin.Engine,
+	)
 }
 
 type BaseHandler struct{}
