@@ -1,2 +1,16 @@
 run:
 	go run src/main.go
+
+generate:
+	@echo "🚀 Chạy tool generate..."
+	go run tools/generate.go
+
+test-generate:
+	@echo "🧪 Test tool generate..."
+	go run tools/test_generate.go
+
+build:
+	go build -o api-gateway.exe src/main.go
+
+clean:
+	rm -f api-gateway.exe

@@ -1,0 +1,176 @@
+node_env: development
+port: 8080
+services:
+  # Authentication & User Management
+  - name: AUTH SERVICE
+    host: localhost
+    port: 50061
+    route: /auth
+    folder: auth
+  - name: USER SERVICE
+    host: localhost
+    port: 50062
+    route: /users
+    folder: user
+  - name: SESSION SERVICE
+    host: localhost
+    port: 50063
+    route: /sessions
+    folder: session
+  - name: ROLE SERVICE
+    host: localhost
+    port: 50064
+    route: /roles
+    folder: role
+  # Greenhouse Management
+  - name: GREENHOUSE SERVICE
+    host: localhost
+    port: 50065
+    route: /greenhouses
+    folder: greenhouse
+  - name: GREENHOUSE INSTALLATION LOG SERVICE
+    host: localhost
+    port: 50066
+    route: /greenhouse-installation-logs
+    folder: greenhouse_installation_log
+  - name: GROWING ZONE SERVICE
+    host: localhost
+    port: 50067
+    route: /growing-zones
+    folder: growing_zone
+  - name: GROWING ZONE HISTORY SERVICE
+    host: localhost
+    port: 50068
+    route: /growing-zone-histories
+    folder: growing_zone_history
+  # IoT & Device Management
+  - name: IOT DEVICE SERVICE
+    host: localhost
+    port: 50060
+    route: /iot-devices
+    folder: iot_device
+  - name: IOT DEVICE HISTORY SERVICE
+    host: localhost
+    port: 50069
+    route: /iot-device-histories
+    folder: iot_device_history
+  - name: DEVICE TYPE SERVICE
+    host: localhost
+    port: 50070
+    route: /device-types
+    folder: device_type
+  - name: SENSOR DATA SERVICE
+    host: localhost
+    port: 50071
+    route: /sensor-data
+    folder: sensor_data
+  # Plant & Crop Management
+  - name: PLANT VARIETY SERVICE
+    host: localhost
+    port: 50072
+    route: /plant-varieties
+    folder: plant_variety
+  - name: PLANTING CYCLE SERVICE
+    host: localhost
+    port: 50073
+    route: /planting-cycles
+    folder: planting_cycle
+  - name: HARVEST RECORD SERVICE
+    host: localhost
+    port: 50074
+    route: /harvest-records
+    folder: harvest_record
+  - name: PEST DISEASE RECORD SERVICE
+    host: localhost
+    port: 50075
+    route: /pest-disease-records
+    folder: pest_disease_record
+  # Irrigation & Fertilizer
+  - name: IRRIGATION SCHEDULE SERVICE
+    host: localhost
+    port: 50076
+    route: /irrigation-schedules
+    folder: irrigation_schedule
+  - name: IRRIGATION LOG SERVICE
+    host: localhost
+    port: 50077
+    route: /irrigation-logs
+    folder: irrigation_log
+  - name: FERTILIZER TYPE SERVICE
+    host: localhost
+    port: 50078
+    route: /fertilizer-types
+    folder: fertilizer_type
+  - name: FERTILIZER SCHEDULE SERVICE
+    host: localhost
+    port: 50079
+    route: /fertilizer-schedules
+    folder: fertilizer_schedule
+  # Maintenance & Alerts
+  - name: MAINTENANCE SCHEDULE SERVICE
+    host: localhost
+    port: 50080
+    route: /maintenance-schedules
+    folder: maintenance_schedule
+  - name: ENVIRONMENTAL ALERT SERVICE
+    host: localhost
+    port: 50081
+    route: /environmental-alerts
+    folder: environmental_alert
+  - name: STATUS HISTORY SERVICE
+    host: localhost
+    port: 50082
+    route: /status-histories
+    folder: status_history
+  # Mail System
+  - name: MAIL PROVIDER SERVICE
+    host: localhost
+    port: 50083
+    route: /mail-providers
+    folder: mail_provider
+  - name: MAIL STATUS SERVICE
+    host: localhost
+    port: 50084
+    route: /mail-statuses
+    folder: mail_status
+  - name: MAIL HISTORY SERVICE
+    host: localhost
+    port: 50085
+    route: /mail-histories
+    folder: mail_history
+  - name: MAIL TEMPLATE SERVICE
+    host: localhost
+    port: 50086
+    route: /mail-templates
+    folder: mail_template
+  - name: TYPE MAIL SERVICE
+    host: localhost
+    port: 50087
+    route: /type-mails
+    folder: type_mail
+  # System & Configuration
+  - name: SYSTEM CONFIGURATION SERVICE
+    host: localhost
+    port: 50057
+    route: /system-configurations
+    folder: system_configuration
+  - name: COST TRACKING SERVICE
+    host: localhost
+    port: 50088
+    route: /cost-trackings
+    folder: cost_tracking
+  - name: MODULE SERVICE
+    host: localhost
+    port: 50089
+    route: /modules
+    folder: module
+  - name: MODULE CHILD SERVICE
+    host: localhost
+    port: 50090
+    route: /module-children
+    folder: module_child
+  - name: MEDIA SERVICE
+    host: localhost
+    port: 50091
+    route: /media
+    folder: media
