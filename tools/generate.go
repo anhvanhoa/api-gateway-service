@@ -364,7 +364,7 @@ func createServiceHandlersFile(handlers []ServiceInfo) error {
 		swaggerPath = strings.ReplaceAll(swaggerPath, "/", "\\")
 		// Escape backslashes for Go string literal
 		swaggerPath = strings.ReplaceAll(swaggerPath, "\\", "\\\\")
-		newContent.WriteString(fmt.Sprintf("\t\t\"%s\": ServiceHandler{\n", handler.Folder))
+		newContent.WriteString(fmt.Sprintf("\t\t\"%s\": {\n", handler.Folder))
 		newContent.WriteString(fmt.Sprintf("\t\t\tHandler: %s.%s,\n", alias, handler.HandlerName))
 		newContent.WriteString(fmt.Sprintf("\t\t\tSwagger: \"%s\",\n", swaggerPath))
 		newContent.WriteString("\t\t},\n")
