@@ -4,14 +4,14 @@ go 1.25.0
 
 require (
 	github.com/anhvanhoa/service-core v0.0.0-20251008083007-3a4d96fe5f88
-	github.com/anhvanhoa/sf-proto v0.0.0-20251013045441-e59a7a5395f7
+	github.com/anhvanhoa/sf-proto v0.0.0-20251014075058-f2bb2eeff57b
 	github.com/gin-gonic/gin v1.11.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
-	google.golang.org/grpc v1.75.1
+	google.golang.org/grpc v1.76.0
 )
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.8-20250717185734-6c6e0d3c608e.1 // indirect
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1 // indirect
 	github.com/bytedance/sonic v1.14.0 // indirect
 	github.com/bytedance/sonic/loader v0.3.0 // indirect
 	github.com/cloudwego/base64x v0.1.6 // indirect

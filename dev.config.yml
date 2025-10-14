@@ -142,7 +142,7 @@ services:
     host: localhost
     port: 50086
     route: /mail-templates
-    folder: mail_template
+    folder: mail_tmpl
   - name: TYPE MAIL SERVICE
     host: localhost
     port: 50087
@@ -159,16 +159,6 @@ services:
     port: 50088
     route: /cost-trackings
     folder: cost_tracking
-  - name: MODULE SERVICE
-    host: localhost
-    port: 50089
-    route: /modules
-    folder: module
-  - name: MODULE CHILD SERVICE
-    host: localhost
-    port: 50090
-    route: /module-children
-    folder: module_child
   - name: MEDIA SERVICE
     host: localhost
     port: 50091
