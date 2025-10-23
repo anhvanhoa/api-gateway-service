@@ -3,8 +3,8 @@ module api-gateway
 go 1.25.0
 
 require (
-	github.com/anhvanhoa/service-core v0.0.0-20251008083007-3a4d96fe5f88
-	github.com/anhvanhoa/sf-proto v0.0.0-20251014075058-f2bb2eeff57b
+	github.com/anhvanhoa/service-core v0.0.0-20251023075654-c76f3d51ba68
+	github.com/anhvanhoa/sf-proto v0.0.0-20251021093736-e2719d3e1c04
 	github.com/gin-gonic/gin v1.11.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
 	google.golang.org/grpc v1.76.0
@@ -45,12 +45,12 @@ require (
 	go.uber.org/mock v0.5.0 // indirect
 	golang.org/x/arch v0.20.0 // indirect
 	golang.org/x/crypto v0.42.0 // indirect
-	golang.org/x/mod v0.27.0 // indirect
+	golang.org/x/mod v0.28.0 // indirect
 	golang.org/x/net v0.44.0 // indirect
 	golang.org/x/sync v0.17.0 // indirect
 	golang.org/x/sys v0.36.0 // indirect
-	golang.org/x/text v0.29.0 // indirect
-	golang.org/x/tools v0.36.0 // indirect
+	golang.org/x/text v0.30.0 // indirect
+	golang.org/x/tools v0.37.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20251007200510-49b9836ed3ff // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251002232023-7c0ddcbb5797 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
