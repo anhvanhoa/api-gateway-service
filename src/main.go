@@ -22,6 +22,14 @@ func main() {
 	router.Use(gin.Recovery())
 	router.Use(gin.Logger())
 
+	// Thêm health route
+	router.GET("/health", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"status":  "healthy",
+			"message": "API Gateway is running",
+		})
+	})
+
 	// Tạo handler và đăng ký service routes trước
 	baseHandler := handler.NewBaseHandler(&env, router, ctx)
 	handlerMap := handler.GetServiceHandlers()

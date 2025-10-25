@@ -8,6 +8,10 @@ import (
 	proto_user "github.com/anhvanhoa/sf-proto/gen/user/v1"
 	proto_session "github.com/anhvanhoa/sf-proto/gen/session/v1"
 	proto_role "github.com/anhvanhoa/sf-proto/gen/role/v1"
+	proto_permission "github.com/anhvanhoa/sf-proto/gen/permission/v1"
+	proto_role_permission "github.com/anhvanhoa/sf-proto/gen/role_permission/v1"
+	proto_user_role "github.com/anhvanhoa/sf-proto/gen/user_role/v1"
+	proto_resource_permission "github.com/anhvanhoa/sf-proto/gen/resource_permission/v1"
 	proto_greenhouse "github.com/anhvanhoa/sf-proto/gen/greenhouse/v1"
 	proto_greenhouse_installation_log "github.com/anhvanhoa/sf-proto/gen/greenhouse_installation_log/v1"
 	proto_growing_zone "github.com/anhvanhoa/sf-proto/gen/growing_zone/v1"
@@ -47,127 +51,143 @@ func GetServiceHandlers() map[string]ServiceHandler {
 	return map[string]ServiceHandler{
 		"auth": {
 			Handler: proto_auth.RegisterAuthServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\auth\\v1\\auth.swagger.json",
+			Swagger: "./swagger/auth/v1/auth.swagger.json",
 		},
 		"user": {
 			Handler: proto_user.RegisterUserServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\user\\v1\\user.swagger.json",
+			Swagger: "./swagger/user/v1/user.swagger.json",
 		},
 		"session": {
 			Handler: proto_session.RegisterSessionServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\session\\v1\\session.swagger.json",
+			Swagger: "./swagger/session/v1/session.swagger.json",
 		},
 		"role": {
 			Handler: proto_role.RegisterRoleServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\role\\v1\\role.swagger.json",
+			Swagger: "./swagger/role/v1/role.swagger.json",
+		},
+		"permission": {
+			Handler: proto_permission.RegisterPermissionServiceHandler,
+			Swagger: "./swagger/permission/v1/permission.swagger.json",
+		},
+		"role_permission": {
+			Handler: proto_role_permission.RegisterRolePermissionServiceHandler,
+			Swagger: "./swagger/role_permission/v1/role_permission.swagger.json",
+		},
+		"user_role": {
+			Handler: proto_user_role.RegisterUserRoleServiceHandler,
+			Swagger: "./swagger/user_role/v1/user_role.swagger.json",
+		},
+		"resource_permission": {
+			Handler: proto_resource_permission.RegisterResourcePermissionServiceHandler,
+			Swagger: "./swagger/resource_permission/v1/resource_permission.swagger.json",
 		},
 		"greenhouse": {
 			Handler: proto_greenhouse.RegisterGreenhouseServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\greenhouse\\v1\\greenhouse.swagger.json",
+			Swagger: "./swagger/greenhouse/v1/greenhouse.swagger.json",
 		},
 		"greenhouse_installation_log": {
 			Handler: proto_greenhouse_installation_log.RegisterGreenhouseInstallationLogServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\greenhouse_installation_log\\v1\\greenhouse_installation_log.swagger.json",
+			Swagger: "./swagger/greenhouse_installation_log/v1/greenhouse_installation_log.swagger.json",
 		},
 		"growing_zone": {
 			Handler: proto_growing_zone.RegisterGrowingZoneServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\growing_zone\\v1\\growing_zone.swagger.json",
+			Swagger: "./swagger/growing_zone/v1/growing_zone.swagger.json",
 		},
 		"growing_zone_history": {
 			Handler: proto_growing_zone_history.RegisterGrowingZoneHistoryServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\growing_zone_history\\v1\\growing_zone_history.swagger.json",
+			Swagger: "./swagger/growing_zone_history/v1/growing_zone_history.swagger.json",
 		},
 		"iot_device": {
 			Handler: proto_iot_device.RegisterIoTDeviceServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\iot_device\\v1\\iot_device.swagger.json",
+			Swagger: "./swagger/iot_device/v1/iot_device.swagger.json",
 		},
 		"iot_device_history": {
 			Handler: proto_iot_device_history.RegisterIoTDeviceHistoryServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\iot_device_history\\v1\\iot_device_history.swagger.json",
+			Swagger: "./swagger/iot_device_history/v1/iot_device_history.swagger.json",
 		},
 		"device_type": {
 			Handler: proto_device_type.RegisterDeviceTypeServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\device_type\\v1\\device_type.swagger.json",
+			Swagger: "./swagger/device_type/v1/device_type.swagger.json",
 		},
 		"sensor_data": {
 			Handler: proto_sensor_data.RegisterSensorDataServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\sensor_data\\v1\\sensor_data.swagger.json",
+			Swagger: "./swagger/sensor_data/v1/sensor_data.swagger.json",
 		},
 		"plant_variety": {
 			Handler: proto_plant_variety.RegisterPlantVarietyServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\plant_variety\\v1\\plant_variety.swagger.json",
+			Swagger: "./swagger/plant_variety/v1/plant_variety.swagger.json",
 		},
 		"planting_cycle": {
 			Handler: proto_planting_cycle.RegisterPlantingCycleServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\planting_cycle\\v1\\planting_cycle.swagger.json",
+			Swagger: "./swagger/planting_cycle/v1/planting_cycle.swagger.json",
 		},
 		"harvest_record": {
 			Handler: proto_harvest_record.RegisterHarvestRecordServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\harvest_record\\v1\\harvest_record.swagger.json",
+			Swagger: "./swagger/harvest_record/v1/harvest_record.swagger.json",
 		},
 		"pest_disease_record": {
 			Handler: proto_pest_disease_record.RegisterPestDiseaseRecordServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\pest_disease_record\\v1\\pest_disease_record.swagger.json",
+			Swagger: "./swagger/pest_disease_record/v1/pest_disease_record.swagger.json",
 		},
 		"irrigation_schedule": {
 			Handler: proto_irrigation_schedule.RegisterIrrigationScheduleServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\irrigation_schedule\\v1\\irrigation_schedule.swagger.json",
+			Swagger: "./swagger/irrigation_schedule/v1/irrigation_schedule.swagger.json",
 		},
 		"irrigation_log": {
 			Handler: proto_irrigation_log.RegisterIrrigationLogServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\irrigation_log\\v1\\irrigation_log.swagger.json",
+			Swagger: "./swagger/irrigation_log/v1/irrigation_log.swagger.json",
 		},
 		"fertilizer_type": {
 			Handler: proto_fertilizer_type.RegisterFertilizerTypeServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\fertilizer_type\\v1\\fertilizer_type.swagger.json",
+			Swagger: "./swagger/fertilizer_type/v1/fertilizer_type.swagger.json",
 		},
 		"fertilizer_schedule": {
 			Handler: proto_fertilizer_schedule.RegisterFertilizerScheduleServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\fertilizer_schedule\\v1\\fertilizer_schedule.swagger.json",
+			Swagger: "./swagger/fertilizer_schedule/v1/fertilizer_schedule.swagger.json",
 		},
 		"maintenance_schedule": {
 			Handler: proto_maintenance_schedule.RegisterMaintenanceScheduleServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\maintenance_schedule\\v1\\maintenance_schedule.swagger.json",
+			Swagger: "./swagger/maintenance_schedule/v1/maintenance_schedule.swagger.json",
 		},
 		"environmental_alert": {
 			Handler: proto_environmental_alert.RegisterEnvironmentalAlertServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\environmental_alert\\v1\\environmental_alert.swagger.json",
+			Swagger: "./swagger/environmental_alert/v1/environmental_alert.swagger.json",
 		},
 		"status_history": {
 			Handler: proto_status_history.RegisterStatusHistoryServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\status_history\\v1\\status_history.swagger.json",
+			Swagger: "./swagger/status_history/v1/status_history.swagger.json",
 		},
 		"mail_provider": {
 			Handler: proto_mail_provider.RegisterMailProviderServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\mail_provider\\v1\\mail_provider.swagger.json",
+			Swagger: "./swagger/mail_provider/v1/mail_provider.swagger.json",
 		},
 		"mail_status": {
 			Handler: proto_mail_status.RegisterMailStatusServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\mail_status\\v1\\mail_status.swagger.json",
+			Swagger: "./swagger/mail_status/v1/mail_status.swagger.json",
 		},
 		"mail_history": {
 			Handler: proto_mail_history.RegisterMailHistoryServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\mail_history\\v1\\mail_history.swagger.json",
+			Swagger: "./swagger/mail_history/v1/mail_history.swagger.json",
 		},
 		"mail_tmpl": {
 			Handler: proto_mail_tmpl.RegisterMailTmplServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\mail_tmpl\\v1\\mail_tmpl.swagger.json",
+			Swagger: "./swagger/mail_tmpl/v1/mail_tmpl.swagger.json",
 		},
 		"type_mail": {
 			Handler: proto_type_mail.RegisterTypeMailServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\type_mail\\v1\\type_mail.swagger.json",
+			Swagger: "./swagger/type_mail/v1/type_mail.swagger.json",
 		},
 		"system_configuration": {
 			Handler: proto_system_configuration.RegisterSystemConfigurationServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\system_configuration\\v1\\system_configuration.swagger.json",
+			Swagger: "./swagger/system_configuration/v1/system_configuration.swagger.json",
 		},
 		"cost_tracking": {
 			Handler: proto_cost_tracking.RegisterCostTrackingServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\cost_tracking\\v1\\cost_tracking.swagger.json",
+			Swagger: "./swagger/cost_tracking/v1/cost_tracking.swagger.json",
 		},
 		"media": {
 			Handler: proto_media.RegisterMediaServiceHandler,
-			Swagger: "C:\\Users\\a\\go\\pkg\\mod\\github.com\\anhvanhoa\\sf-proto@v0.0.0-20251021093736-e2719d3e1c04\\gen\\media\\v1\\media.swagger.json",
+			Swagger: "./swagger/media/v1/media.swagger.json",
 		},
 	}
 }

@@ -68,6 +68,13 @@ func main() {
 	}
 	fmt.Println("✅ Đã tạo file service_handlers.go thành công")
 
+	// Bước 5: Copy swagger files
+	fmt.Println("📁 Đang copy swagger files...")
+	if err := copySwaggerFiles(handlers); err != nil {
+		log.Fatalf("Lỗi khi copy swagger files: %v", err)
+	}
+	fmt.Println("✅ Đã copy swagger files thành công")
+
 	fmt.Println("🎉 Hoàn thành quá trình generate!")
 }
 
@@ -348,6 +355,32 @@ func createServiceHandlersFile(handlers []ServiceInfo) error {
 	newContent.WriteString("func GetServiceHandlers() map[string]ServiceHandler {\n")
 	newContent.WriteString("\treturn map[string]ServiceHandler{\n")
 
+	// Thêm các handlers
+	for _, handler := range handlers {
+		alias := importMap[handler.ImportPath]
+		// Use relative path for swagger files in Docker container
+		swaggerPath := filepath.Join("swagger", handler.Folder, "v1", handler.Folder+".swagger.json")
+		// Convert to forward slashes for consistency
+		swaggerPath = strings.ReplaceAll(swaggerPath, "\\", "/")
+		newContent.WriteString(fmt.Sprintf("\t\t\"%s\": {\n", handler.Folder))
+		newContent.WriteString(fmt.Sprintf("\t\t\tHandler: %s.%s,\n", alias, handler.HandlerName))
+		newContent.WriteString(fmt.Sprintf("\t\t\tSwagger: \"%s\",\n", "./"+swaggerPath))
+		newContent.WriteString("\t\t},\n")
+	}
+
+	newContent.WriteString("\t}\n")
+	newContent.WriteString("}\n")
+
+	// Ghi file mới
+	err := os.WriteFile(handlersFilePath, []byte(newContent.String()), 0644)
+	if err != nil {
+		return fmt.Errorf("không thể ghi file service_handlers.go: %v", err)
+	}
+
+	return nil
+}
+
+func copySwaggerFiles(handlers []ServiceInfo) error {
 	// Tìm đường dẫn module sf-proto
 	cmd := exec.Command("go", "list", "-m", "-f", "{{.Dir}}", "github.com/anhvanhoa/sf-proto")
 	output, err := cmd.Output()
@@ -356,28 +389,54 @@ func createServiceHandlersFile(handlers []ServiceInfo) error {
 	}
 	moduleDir := strings.TrimSpace(string(output))
 
-	// Thêm các handlers
-	for _, handler := range handlers {
-		alias := importMap[handler.ImportPath]
-		swaggerPath := filepath.Join(moduleDir, "gen", handler.Folder, "v1", handler.Folder+".swagger.json")
-		// Convert to Windows path format if needed
-		swaggerPath = strings.ReplaceAll(swaggerPath, "/", "\\")
-		// Escape backslashes for Go string literal
-		swaggerPath = strings.ReplaceAll(swaggerPath, "\\", "\\\\")
-		newContent.WriteString(fmt.Sprintf("\t\t\"%s\": {\n", handler.Folder))
-		newContent.WriteString(fmt.Sprintf("\t\t\tHandler: %s.%s,\n", alias, handler.HandlerName))
-		newContent.WriteString(fmt.Sprintf("\t\t\tSwagger: \"%s\",\n", swaggerPath))
-		newContent.WriteString("\t\t},\n")
+	// Tạo thư mục swagger nếu chưa có
+	swaggerDir := "swagger"
+	if err := os.MkdirAll(swaggerDir, 0755); err != nil {
+		return fmt.Errorf("không thể tạo thư mục swagger: %v", err)
 	}
 
-	newContent.WriteString("\t}\n")
-	newContent.WriteString("}\n")
+	// Copy từng swagger file
+	for _, handler := range handlers {
+		// Đường dẫn nguồn
+		sourcePath := filepath.Join(moduleDir, "gen", handler.Folder, "v1", handler.Folder+".swagger.json")
 
-	// Ghi file mới
-	err = os.WriteFile(handlersFilePath, []byte(newContent.String()), 0644)
-	if err != nil {
-		return fmt.Errorf("không thể ghi file service_handlers.go: %v", err)
+		// Đường dẫn đích
+		destDir := filepath.Join(swaggerDir, handler.Folder, "v1")
+		destPath := filepath.Join(destDir, handler.Folder+".swagger.json")
+
+		// Tạo thư mục đích nếu chưa có
+		if err := os.MkdirAll(destDir, 0755); err != nil {
+			return fmt.Errorf("không thể tạo thư mục đích %s: %v", destDir, err)
+		}
+
+		// Copy file
+		if err := copyFile(sourcePath, destPath); err != nil {
+			fmt.Printf("⚠️  Không thể copy swagger file cho %s: %v\n", handler.Folder, err)
+			continue
+		}
+
+		fmt.Printf("✅ Đã copy swagger file: %s\n", handler.Folder)
 	}
 
 	return nil
+}
+
+func copyFile(src, dst string) error {
+	// Đọc file nguồn
+	sourceFile, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer sourceFile.Close()
+
+	// Tạo file đích
+	destFile, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer destFile.Close()
+
+	// Copy nội dung
+	_, err = destFile.ReadFrom(sourceFile)
+	return err
 }

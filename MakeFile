@@ -6,7 +6,13 @@ generate:
 	go run tools/generate.go
 
 build:
-	go build -o api-gateway.exe src/main.go
+	export NODE_ENV=${NODE_ENV} && go build -o api-gateway.exe src/main.go
+
+start:
+	./api-gateway.exe
 
 clean:
 	rm -f api-gateway.exe
+
+docker-build: ## Build the application and run it in the container
+	export NODE_ENV=${NODE_ENV} CONFIG_FILE=${CONFIG_FILE} && docker compose up -d --build

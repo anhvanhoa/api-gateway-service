@@ -2,6 +2,7 @@ package handler
 
 import (
 	"api-gateway/src/bootstrap"
+	"fmt"
 	"net/http"
 	"os"
 
@@ -28,6 +29,7 @@ func (s *SwaggerHandler) ServeSwaggerJSON(c *gin.Context, swaggerPath string) {
 }
 
 func (s *SwaggerHandler) ServeSwaggerUI(c *gin.Context, swaggerURL string) {
+	fmt.Println("swaggerURL: ", swaggerURL)
 	html := `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +59,7 @@ func (s *SwaggerHandler) ServeSwaggerUI(c *gin.Context, swaggerURL string) {
     <script>
         window.onload = function() {
             const ui = SwaggerUIBundle({
-                url: '/` + swaggerURL + `',
+                url: '` + swaggerURL + `',
                 dom_id: '#swagger-ui',
                 deepLinking: true,
                 presets: [

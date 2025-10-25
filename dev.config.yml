@@ -1,166 +1,186 @@
 node_env: development
-port: 8080
+port: 8088
 services:
   # Authentication & User Management
-  - name: AUTH SERVICE
+  - name: AUTH
     host: localhost
-    port: 50061
+    port: 40064
     route: /auth
     folder: auth
-  - name: USER SERVICE
+  - name: USER
     host: localhost
-    port: 50062
+    port: 40063
     route: /users
     folder: user
-  - name: SESSION SERVICE
+  - name: SESSION
     host: localhost
-    port: 50063
+    port: 40064
     route: /sessions
     folder: session
-  - name: ROLE SERVICE
+  - name: ROLE
     host: localhost
-    port: 50064
+    port: 40051
     route: /roles
     folder: role
-  # Greenhouse Management
-  - name: GREENHOUSE SERVICE
+  - name: PERMISSION
     host: localhost
-    port: 50065
+    port: 40051
+    route: /permissions
+    folder: permission
+  - name: ROLE PERMISSION
+    host: localhost
+    port: 40051
+    route: /role-permissions
+    folder: role_permission
+  - name: USER ROLE
+    host: localhost
+    port: 40051
+    route: /user-roles
+    folder: user_role
+  - name: RESOURCE PERMISSION
+    host: localhost
+    port: 40051
+    route: /resource-permissions
+    folder: resource_permission
+  # Greenhouse Management
+  - name: GREENHOUSE
+    host: localhost
+    port: 40062
     route: /greenhouses
     folder: greenhouse
-  - name: GREENHOUSE INSTALLATION LOG SERVICE
+  - name: GREENHOUSE INSTALLATION LOG
     host: localhost
-    port: 50066
+    port: 40062
     route: /greenhouse-installation-logs
     folder: greenhouse_installation_log
-  - name: GROWING ZONE SERVICE
+  - name: GROWING ZONE
     host: localhost
-    port: 50067
+    port: 40062
     route: /growing-zones
     folder: growing_zone
-  - name: GROWING ZONE HISTORY SERVICE
+  - name: GROWING ZONE HISTORY
     host: localhost
-    port: 50068
+    port: 40062 
     route: /growing-zone-histories
     folder: growing_zone_history
   # IoT & Device Management
-  - name: IOT DEVICE SERVICE
+  - name: IOT DEVICE
     host: localhost
-    port: 50060
+    port: 40055
     route: /iot-devices
     folder: iot_device
-  - name: IOT DEVICE HISTORY SERVICE
+  - name: IOT DEVICE HISTORY
     host: localhost
-    port: 50069
+    port: 40055
     route: /iot-device-histories
     folder: iot_device_history
-  - name: DEVICE TYPE SERVICE
+  - name: DEVICE TYPE
     host: localhost
-    port: 50070
+    port: 40055
     route: /device-types
     folder: device_type
-  - name: SENSOR DATA SERVICE
+  - name: SENSOR DATA
     host: localhost
-    port: 50071
+    port: 40055
     route: /sensor-data
     folder: sensor_data
   # Plant & Crop Management
-  - name: PLANT VARIETY SERVICE
+  - name: PLANT VARIETY
     host: localhost
-    port: 50072
+    port: 40056
     route: /plant-varieties
     folder: plant_variety
-  - name: PLANTING CYCLE SERVICE
+  - name: PLANTING CYCLE
     host: localhost
-    port: 50073
+    port: 40056
     route: /planting-cycles
     folder: planting_cycle
-  - name: HARVEST RECORD SERVICE
+  - name: HARVEST RECORD
     host: localhost
-    port: 50074
+    port: 40058
     route: /harvest-records
     folder: harvest_record
-  - name: PEST DISEASE RECORD SERVICE
+  - name: PEST DISEASE RECORD
     host: localhost
-    port: 50075
+    port: 40058
     route: /pest-disease-records
     folder: pest_disease_record
   # Irrigation & Fertilizer
-  - name: IRRIGATION SCHEDULE SERVICE
+  - name: IRRIGATION SCHEDULE
     host: localhost
-    port: 50076
+    port: 40060
     route: /irrigation-schedules
     folder: irrigation_schedule
-  - name: IRRIGATION LOG SERVICE
+  - name: IRRIGATION LOG
     host: localhost
-    port: 50077
+    port: 40060
     route: /irrigation-logs
     folder: irrigation_log
-  - name: FERTILIZER TYPE SERVICE
+  - name: FERTILIZER TYPE
     host: localhost
-    port: 50078
+    port: 40060
     route: /fertilizer-types
     folder: fertilizer_type
-  - name: FERTILIZER SCHEDULE SERVICE
+  - name: FERTILIZER SCHEDULE
     host: localhost
-    port: 50079
+    port: 40060
     route: /fertilizer-schedules
     folder: fertilizer_schedule
   # Maintenance & Alerts
-  - name: MAINTENANCE SCHEDULE SERVICE
+  - name: MAINTENANCE SCHEDULE
     host: localhost
-    port: 50080
+    port: 40059
     route: /maintenance-schedules
     folder: maintenance_schedule
-  - name: ENVIRONMENTAL ALERT SERVICE
+  - name: ENVIRONMENTAL ALERT
     host: localhost
-    port: 50081
+    port: 40057
     route: /environmental-alerts
     folder: environmental_alert
-  - name: STATUS HISTORY SERVICE
+  - name: STATUS HISTORY
     host: localhost
-    port: 50082
+    port: 40052
     route: /status-histories
     folder: status_history
   # Mail System
-  - name: MAIL PROVIDER SERVICE
+  - name: MAIL PROVIDER
     host: localhost
-    port: 50083
+    port: 40052
     route: /mail-providers
     folder: mail_provider
-  - name: MAIL STATUS SERVICE
+  - name: MAIL STATUS
     host: localhost
-    port: 50084
+    port: 40052
     route: /mail-statuses
     folder: mail_status
-  - name: MAIL HISTORY SERVICE
+  - name: MAIL HISTORY
     host: localhost
-    port: 50085
+    port: 40052
     route: /mail-histories
     folder: mail_history
-  - name: MAIL TEMPLATE SERVICE
+  - name: MAIL TEMPLATE
     host: localhost
-    port: 50086
+    port: 40052
     route: /mail-templates
     folder: mail_tmpl
-  - name: TYPE MAIL SERVICE
+  - name: TYPE MAIL
     host: localhost
-    port: 50087
+    port: 40052
     route: /type-mails
     folder: type_mail
   # System & Configuration
-  - name: SYSTEM CONFIGURATION SERVICE
+  - name: SYSTEM CONFIGURATION
     host: localhost
-    port: 50057
+    port: 40054
     route: /system-configurations
     folder: system_configuration
-  - name: COST TRACKING SERVICE
+  - name: COST TRACKING
     host: localhost
-    port: 50088
+    port: 40061
     route: /cost-trackings
     folder: cost_tracking
-  - name: MEDIA SERVICE
+  - name: MEDIA
     host: localhost
-    port: 50091
+    port: 40063
     route: /media
     folder: media

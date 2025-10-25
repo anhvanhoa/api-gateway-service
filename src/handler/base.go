@@ -4,7 +4,6 @@ import (
 	"api-gateway/src/bootstrap"
 	"context"
 	"log"
-	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
@@ -62,8 +61,8 @@ func (h *BaseHandler) AddService(service *Service) {
 	log.Printf("Đã đăng ký service: %s tại route: %s", service.Name, service.Route)
 
 	// Đăng ký gRPC gateway vào Gin router
-	fileJSON := filepath.Join(service.Route, ".json")
-	h.router.GET(service.Route+".json", func(c *gin.Context) {
+	fileJSON := service.Route + ".json"
+	h.router.GET(fileJSON, func(c *gin.Context) {
 		h.swaggerHandler.ServeSwaggerJSON(c, service.Swagger)
 	})
 	h.router.GET("/swagger"+service.Route, func(c *gin.Context) {
