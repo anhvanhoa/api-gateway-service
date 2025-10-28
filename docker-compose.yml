@@ -2,7 +2,7 @@ services:
   api-gateway:
     build:
       context: .
-      dockerfile: DockerFile
+      dockerfile: Dockerfile
       secrets:
         - github_token
     image: api-gateway:latest

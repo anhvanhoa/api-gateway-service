@@ -12,10 +12,15 @@ RUN git config --global url."https://github.com/".insteadOf "git@github.com:" &&
     git config --global url."https://".insteadOf "git://"
 
 # Set up authentication for private repositories using BuildKit secrets
+ARG GOPRIVATE=github.com/anhvanhoa/*
+ENV GOPRIVATE=${GOPRIVATE}
+ENV GONOSUMDB=${GOPRIVATE}
+
+# Prepare auth for private repos when available (BuildKit secret)
 RUN --mount=type=secret,id=github_token \
     if [ -f /run/secrets/github_token ]; then \
         GITHUB_TOKEN=$(cat /run/secrets/github_token) && \
-        echo "machine github.com login $GITHUB_TOKEN password x-oauth-basic" > ~/.netrc && \
+        printf "machine github.com\n  login %s\n  password x-oauth-basic\n" "$GITHUB_TOKEN" > ~/.netrc && \
         chmod 600 ~/.netrc; \
     fi
 
@@ -23,13 +28,26 @@ RUN --mount=type=secret,id=github_token \
 COPY go.mod go.sum ./
 
 # Download dependencies
-RUN go mod tidy
+RUN --mount=type=secret,id=github_token \
+    if [ -f /run/secrets/github_token ]; then \
+      GITHUB_TOKEN=$(cat /run/secrets/github_token); \
+      printf "machine github.com\n  login %s\n  password x-oauth-basic\n" "$GITHUB_TOKEN" > ~/.netrc; \
+      chmod 600 ~/.netrc; \
+    fi; \
+    go mod tidy
 
 # Copy source code
 COPY . .
 
 # RUN go generate
-RUN go run tools/generate.go
+# Ensure private module access also during generate
+RUN --mount=type=secret,id=github_token \
+    if [ -f /run/secrets/github_token ]; then \
+      GITHUB_TOKEN=$(cat /run/secrets/github_token); \
+      printf "machine github.com\n  login %s\n  password x-oauth-basic\n" "$GITHUB_TOKEN" > ~/.netrc; \
+      chmod 600 ~/.netrc; \
+    fi; \
+    go run tools/generate.go
 
 # Build the application
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main ./src/main.go

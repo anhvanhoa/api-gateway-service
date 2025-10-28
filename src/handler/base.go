@@ -25,12 +25,13 @@ type BaseHandler struct {
 }
 
 func NewBaseHandler(env *bootstrap.Env, router *gin.Engine, ctx context.Context) Handler {
-	return &BaseHandler{
+	handler := &BaseHandler{
 		env:      env,
 		router:   router,
 		ctx:      ctx,
 		services: make(map[string]*grpc.ClientConn),
 	}
+	return handler
 }
 
 func (h *BaseHandler) AddService(service *Service) {
@@ -58,9 +59,6 @@ func (h *BaseHandler) AddService(service *Service) {
 		return
 	}
 
-	log.Printf("Đã đăng ký service: %s tại route: %s", service.Name, service.Route)
-
-	// Đăng ký gRPC gateway vào Gin router
 	fileJSON := service.Route + ".json"
 	h.router.GET(fileJSON, func(c *gin.Context) {
 		h.swaggerHandler.ServeSwaggerJSON(c, service.Swagger)

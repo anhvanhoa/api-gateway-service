@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,20 +18,19 @@ func main() {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
-	// Tạo Gin router
+	// CORS
+	corsConfig := cors.New(cors.Config{
+		AllowOrigins:     []string{"http://127.0.0.1:5500"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Content-Type", "Authorization"},
+		AllowCredentials: true,
+	})
 	router := gin.New()
+	router.Use(corsConfig)
 	router.Use(gin.Recovery())
 	router.Use(gin.Logger())
+	router.Use(handler.CookieMiddleware())
 
-	// Thêm health route
-	router.GET("/health", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"status":  "healthy",
-			"message": "API Gateway is running",
-		})
-	})
-
-	// Tạo handler và đăng ký service routes trước
 	baseHandler := handler.NewBaseHandler(&env, router, ctx)
 	handlerMap := handler.GetServiceHandlers()
 	for _, service := range env.Services {

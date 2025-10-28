@@ -29,7 +29,7 @@ func CustomErrorHandler(ctx context.Context, mux *runtime.ServeMux, marshaler ru
 			// Trả về lỗi tùy chỉnh
 			customError := CustomErrorResponse{
 				Code:    503,
-				Message: "IoT Device service is currently unavailable. Please try again later.",
+				Message: "Service is currently unavailable. Please try again later.",
 				Details: []any{},
 			}
 
@@ -41,7 +41,7 @@ func CustomErrorHandler(ctx context.Context, mux *runtime.ServeMux, marshaler ru
 				w.Write(jsonBytes)
 			} else {
 				// Fallback nếu không thể marshal
-				w.Write([]byte(`{"code":503,"message":"IoT Device service is currently unavailable. Please try again later.","details":[]}`))
+				w.Write([]byte(`{"code":503,"message":"Service is currently unavailable. Please try again later.","details":[]}`))
 			}
 			return
 		}
