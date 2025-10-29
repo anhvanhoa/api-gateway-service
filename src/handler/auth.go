@@ -91,7 +91,10 @@ func HandleAuth(
 
 	// Logout endpoint
 	c.POST(env.AuthService.Route+"/logout", func(c *gin.Context) {
-		var logoutRequest proto_auth.LogoutRequest
+		logoutRequest := proto_auth.LogoutRequest{
+			RefreshToken: getCookie(c, constants.RefreshTokenCookieName),
+			AccessToken:  getCookie(c, constants.AccessTokenCookieName),
+		}
 		if err := c.ShouldBindJSON(&logoutRequest); err != nil {
 			RespondWithGrpcError(c, err)
 			return
