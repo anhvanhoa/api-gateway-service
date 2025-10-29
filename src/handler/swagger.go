@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"api-gateway/src/bootstrap"
 	"fmt"
 	"net/http"
 	"os"
@@ -10,11 +9,10 @@ import (
 )
 
 type SwaggerHandler struct {
-	env *bootstrap.Env
 }
 
-func NewSwaggerHandler(env *bootstrap.Env) *SwaggerHandler {
-	return &SwaggerHandler{env: env}
+func NewSwaggerHandler() *SwaggerHandler {
+	return &SwaggerHandler{}
 }
 
 func (s *SwaggerHandler) ServeSwaggerJSON(c *gin.Context, swaggerPath string) {

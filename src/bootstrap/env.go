@@ -15,9 +15,11 @@ type ServiceConfig struct {
 }
 
 type Env struct {
-	NodeEnv  string          `mapstructure:"node_env"`
-	Port     int             `mapstructure:"port"`
-	Services []ServiceConfig `mapstructure:"services"`
+	NodeEnv     string          `mapstructure:"node_env"`
+	Domain      string          `mapstructure:"domain"`
+	Port        int             `mapstructure:"port"`
+	Services    []ServiceConfig `mapstructure:"services"`
+	AuthService ServiceConfig   `mapstructure:"auth_service"`
 }
 
 func NewEnv(env any) {

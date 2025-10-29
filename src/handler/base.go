@@ -24,18 +24,21 @@ type BaseHandler struct {
 	swaggerHandler *SwaggerHandler
 }
 
-func NewBaseHandler(env *bootstrap.Env, router *gin.Engine, ctx context.Context) Handler {
+func NewBaseHandler(
+	env *bootstrap.Env, router *gin.Engine, ctx context.Context,
+	swaggerHandler *SwaggerHandler,
+) Handler {
 	handler := &BaseHandler{
-		env:      env,
-		router:   router,
-		ctx:      ctx,
-		services: make(map[string]*grpc.ClientConn),
+		env:            env,
+		router:         router,
+		ctx:            ctx,
+		swaggerHandler: swaggerHandler,
+		services:       make(map[string]*grpc.ClientConn),
 	}
 	return handler
 }
 
 func (h *BaseHandler) AddService(service *Service) {
-	// Tạo gRPC connection
 	conn, err := grpc.NewClient(
 		service.Host+":"+service.Port,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
@@ -45,10 +48,8 @@ func (h *BaseHandler) AddService(service *Service) {
 		return
 	}
 
-	// Lưu trữ connection để sử dụng sau này
 	h.services[service.Name] = conn
 
-	// Tạo gRPC gateway mux
 	grpcMux := runtime.NewServeMux(
 		runtime.WithErrorHandler(CustomErrorHandler),
 	)

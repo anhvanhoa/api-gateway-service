@@ -3,8 +3,8 @@ module api-gateway
 go 1.25.0
 
 require (
-	github.com/anhvanhoa/service-core v0.0.0-20251023075654-c76f3d51ba68
-	github.com/anhvanhoa/sf-proto v0.0.0-20251021093736-e2719d3e1c04
+	github.com/anhvanhoa/service-core v0.0.0-20251029042940-4a3587d68004
+	github.com/anhvanhoa/sf-proto v0.0.0-20251029045801-09ef1c1e3959
 	github.com/gin-contrib/cors v1.7.6
 	github.com/gin-gonic/gin v1.11.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
