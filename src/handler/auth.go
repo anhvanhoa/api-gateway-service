@@ -126,13 +126,11 @@ func HandleAuth(
 	})
 
 	// Check Token endpoint
-	c.POST(env.AuthService.Route+"/check-token", func(c *gin.Context) {
-		var checkTokenRequest proto_auth.CheckTokenRequest
-		if err := c.ShouldBindJSON(&checkTokenRequest); err != nil {
-			RespondWithGrpcError(c, err)
-			return
-		}
-		checkTokenResponse, err := authClient.CheckToken(ctx, &checkTokenRequest)
+	c.GET(env.AuthService.Route+"/check-token/:token", func(c *gin.Context) {
+		token := c.Param("token")
+		checkTokenResponse, err := authClient.CheckToken(ctx, &proto_auth.CheckTokenRequest{
+			Token: token,
+		})
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
@@ -186,11 +184,12 @@ func HandleAuth(
 	})
 
 	// Check Code endpoint
-	c.POST(env.AuthService.Route+"/check-code", func(c *gin.Context) {
-		var checkCodeRequest proto_auth.CheckCodeRequest
-		if err := c.ShouldBindJSON(&checkCodeRequest); err != nil {
-			RespondWithGrpcError(c, err)
-			return
+	c.GET(env.AuthService.Route+"/check-code/:code/:email", func(c *gin.Context) {
+		code := c.Param("code")
+		email := c.Param("email")
+		checkCodeRequest := proto_auth.CheckCodeRequest{
+			Code:  code,
+			Email: email,
 		}
 		checkCodeResponse, err := authClient.CheckCode(ctx, &checkCodeRequest)
 		if err != nil {
