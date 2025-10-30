@@ -4,11 +4,12 @@ go 1.25.0
 
 require (
 	github.com/anhvanhoa/service-core v0.0.0-20251029042940-4a3587d68004
-	github.com/anhvanhoa/sf-proto v0.0.0-20251030140925-9d710758e9ce
+	github.com/anhvanhoa/sf-proto v0.0.0-20251030174232-9201e3b215ca
 	github.com/gin-contrib/cors v1.7.6
 	github.com/gin-gonic/gin v1.11.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
 	google.golang.org/grpc v1.76.0
+	google.golang.org/protobuf v1.36.10
 )
 
 require (
@@ -54,6 +55,5 @@ require (
 	golang.org/x/tools v0.37.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20251007200510-49b9836ed3ff // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251002232023-7c0ddcbb5797 // indirect
-	google.golang.org/protobuf v1.36.10 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

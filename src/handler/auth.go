@@ -6,11 +6,14 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"strings"
 
 	proto_auth "github.com/anhvanhoa/sf-proto/gen/auth/v1"
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 func HandleAuth(
@@ -37,7 +40,8 @@ func HandleAuth(
 			RespondWithGrpcError(c, err)
 			return
 		}
-		loginResponse, err := authClient.Login(ctx, &loginRequest)
+		grpcCtx := outgoingContextWithHeaders(c)
+		loginResponse, err := authClient.Login(grpcCtx, &loginRequest)
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
@@ -57,7 +61,8 @@ func HandleAuth(
 			RespondWithGrpcError(c, err)
 			return
 		}
-		registerResponse, err := authClient.Register(ctx, &registerRequest)
+		grpcCtx := outgoingContextWithHeaders(c)
+		registerResponse, err := authClient.Register(grpcCtx, &registerRequest)
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
@@ -76,7 +81,8 @@ func HandleAuth(
 			RefreshToken: refreshToken,
 			Os:           c.GetHeader("user-agent"),
 		}
-		refreshResponse, err := authClient.RefreshToken(ctx, &refreshRequest)
+		grpcCtx := outgoingContextWithHeaders(c)
+		refreshResponse, err := authClient.RefreshToken(grpcCtx, &refreshRequest)
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
@@ -99,7 +105,8 @@ func HandleAuth(
 			RespondWithGrpcError(c, err)
 			return
 		}
-		logoutResponse, err := authClient.Logout(ctx, &logoutRequest)
+		grpcCtx := outgoingContextWithHeaders(c)
+		logoutResponse, err := authClient.Logout(grpcCtx, &logoutRequest)
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
@@ -117,7 +124,8 @@ func HandleAuth(
 			RespondWithGrpcError(c, err)
 			return
 		}
-		forgotPasswordResponse, err := authClient.ForgotPassword(ctx, &forgotPasswordRequest)
+		grpcCtx := outgoingContextWithHeaders(c)
+		forgotPasswordResponse, err := authClient.ForgotPassword(grpcCtx, &forgotPasswordRequest)
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
@@ -128,7 +136,8 @@ func HandleAuth(
 	// Check Token endpoint
 	c.GET(env.AuthService.Route+"/check-token/:token", func(c *gin.Context) {
 		token := c.Param("token")
-		checkTokenResponse, err := authClient.CheckToken(ctx, &proto_auth.CheckTokenRequest{
+		grpcCtx := outgoingContextWithHeaders(c)
+		checkTokenResponse, err := authClient.CheckToken(grpcCtx, &proto_auth.CheckTokenRequest{
 			Token: token,
 		})
 		if err != nil {
@@ -145,7 +154,8 @@ func HandleAuth(
 			RespondWithGrpcError(c, err)
 			return
 		}
-		verifyAccountResponse, err := authClient.VerifyAccount(ctx, &verifyAccountRequest)
+		grpcCtx := outgoingContextWithHeaders(c)
+		verifyAccountResponse, err := authClient.VerifyAccount(grpcCtx, &verifyAccountRequest)
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
@@ -160,7 +170,8 @@ func HandleAuth(
 			RespondWithGrpcError(c, err)
 			return
 		}
-		passwordByCodeResponse, err := authClient.ResetPasswordByCode(ctx, &passwordByCodeRequest)
+		grpcCtx := outgoingContextWithHeaders(c)
+		passwordByCodeResponse, err := authClient.ResetPasswordByCode(grpcCtx, &passwordByCodeRequest)
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
@@ -175,7 +186,8 @@ func HandleAuth(
 			RespondWithGrpcError(c, err)
 			return
 		}
-		passwordByTokenResponse, err := authClient.ResetPasswordByToken(ctx, &passwordByTokenRequest)
+		grpcCtx := outgoingContextWithHeaders(c)
+		passwordByTokenResponse, err := authClient.ResetPasswordByToken(grpcCtx, &passwordByTokenRequest)
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
@@ -191,12 +203,24 @@ func HandleAuth(
 			Code:  code,
 			Email: email,
 		}
-		checkCodeResponse, err := authClient.CheckCode(ctx, &checkCodeRequest)
+		grpcCtx := outgoingContextWithHeaders(c)
+		checkCodeResponse, err := authClient.CheckCode(grpcCtx, &checkCodeRequest)
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
 		}
 		c.JSON(http.StatusOK, checkCodeResponse)
+	})
+
+	// Get Profile endpoint
+	c.GET(env.AuthService.Route+"/profile", func(c *gin.Context) {
+		grpcCtx := outgoingContextWithHeaders(c)
+		profileResponse, err := authClient.Profile(grpcCtx, &emptypb.Empty{})
+		if err != nil {
+			RespondWithGrpcError(c, err)
+			return
+		}
+		c.JSON(http.StatusOK, profileResponse)
 	})
 
 	fileJSON := env.AuthService.Route + ".json"
@@ -222,4 +246,29 @@ func getCookie(c *gin.Context, name string) string {
 		return ""
 	}
 	return cookie
+}
+
+// outgoingContextWithHeaders forwards all incoming HTTP headers as lowercase keys into gRPC metadata.
+// This ensures cookies and other headers are available to downstream gRPC services.
+func outgoingContextWithHeaders(c *gin.Context) context.Context {
+	if c == nil || c.Request == nil {
+		return c.Request.Context()
+	}
+	hdr := c.Request.Header
+	if len(hdr) == 0 {
+		return c.Request.Context()
+	}
+	pairs := make([]string, 0, len(hdr)*2)
+	for k, values := range hdr {
+		lk := strings.ToLower(k)
+		for _, v := range values {
+			// Convert all headers to grpc metadata keys with grpcgateway- prefix
+			pairs = append(pairs, "grpcgateway-"+lk, v)
+		}
+	}
+	if len(pairs) == 0 {
+		return c.Request.Context()
+	}
+	md := metadata.Pairs(pairs...)
+	return metadata.NewOutgoingContext(c.Request.Context(), md)
 }
