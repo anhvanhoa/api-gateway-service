@@ -5,6 +5,7 @@ import (
 	"api-gateway/src/handler"
 	"context"
 	"fmt"
+	"net/http"
 	"strconv"
 
 	"github.com/gin-contrib/cors"
@@ -29,6 +30,11 @@ func main() {
 	router.Use(corsConfig)
 	router.Use(gin.Recovery())
 	router.Use(gin.Logger())
+
+	// Health check endpoint
+	router.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"status": "ok"})
+	})
 
 	swaggerHandler := handler.NewSwaggerHandler()
 	baseHandler := handler.NewBaseHandler(&env, router, ctx, swaggerHandler)
