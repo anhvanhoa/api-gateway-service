@@ -101,12 +101,8 @@ func HandleAuth(
 			RefreshToken: getCookie(c, constants.RefreshTokenCookieName),
 			AccessToken:  getCookie(c, constants.AccessTokenCookieName),
 		}
-		if err := c.ShouldBindJSON(&logoutRequest); err != nil {
-			RespondWithGrpcError(c, err)
-			return
-		}
-		grpcCtx := outgoingContextWithHeaders(c)
-		logoutResponse, err := authClient.Logout(grpcCtx, &logoutRequest)
+		cxt := outgoingContextWithHeaders(c)
+		logoutResponse, err := authClient.Logout(cxt, &logoutRequest)
 		if err != nil {
 			RespondWithGrpcError(c, err)
 			return
