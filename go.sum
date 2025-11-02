@@ -8,6 +8,8 @@ github.com/anhvanhoa/sf-proto v0.0.0-20251101192548-50ccdc13cfe5 h1:ITOk+pL/jyp2
 github.com/anhvanhoa/sf-proto v0.0.0-20251101192548-50ccdc13cfe5/go.mod h1:fDjSJFXd2PoPiOod6qKRGVjurABW3IuMERwuqyUf3u0=
 github.com/anhvanhoa/sf-proto v0.0.0-20251102053817-9caeefe98c7b h1:g3Ol4TdXsCofns/2IJ86T2+smUnnRxJ7PsIIHG+LOFg=
 github.com/anhvanhoa/sf-proto v0.0.0-20251102053817-9caeefe98c7b/go.mod h1:fDjSJFXd2PoPiOod6qKRGVjurABW3IuMERwuqyUf3u0=
+github.com/anhvanhoa/sf-proto v0.0.0-20251102131832-405fb5b72f7c h1:P/+w6WWa1lAuTfy77GKDyq1IVyUjt0ZHekeVv1FwkNM=
+github.com/anhvanhoa/sf-proto v0.0.0-20251102131832-405fb5b72f7c/go.mod h1:fDjSJFXd2PoPiOod6qKRGVjurABW3IuMERwuqyUf3u0=
 github.com/bytedance/sonic v1.14.0 h1:/OfKt8HFw0kh2rj8N0F6C/qPGRESq0BbaNZgcNXXzQQ=
 github.com/bytedance/sonic v1.14.0/go.mod h1:WoEbx8WTcFJfzCe0hbmyTGrfjt8PzNEBdxlNUO24NhA=
 github.com/bytedance/sonic/loader v0.3.0 h1:dskwH8edlzNMctoruo8FPTJDF3vLtDT0sXZwvZJyqeA=
