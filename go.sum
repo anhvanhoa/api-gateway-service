@@ -36,6 +36,14 @@ github.com/anhvanhoa/sf-proto v0.0.0-20251117064603-742f6a1286a5 h1:9oTcA4dRJ2hv
 github.com/anhvanhoa/sf-proto v0.0.0-20251117064603-742f6a1286a5/go.mod h1:fDjSJFXd2PoPiOod6qKRGVjurABW3IuMERwuqyUf3u0=
 github.com/anhvanhoa/sf-proto v0.0.0-20251117123950-68268c47b51a h1:RV4+KrpAbf3jd0JCABxXK5olPmBaSGfRFYGV0/00z9E=
 github.com/anhvanhoa/sf-proto v0.0.0-20251117123950-68268c47b51a/go.mod h1:fDjSJFXd2PoPiOod6qKRGVjurABW3IuMERwuqyUf3u0=
+github.com/anhvanhoa/sf-proto v0.0.0-20251118045524-e76f2b15b3b0 h1:Q0+uPO42iFEuDUL5QJFk5uEfEtpgiWgmSEeVkEwb2Is=
+github.com/anhvanhoa/sf-proto v0.0.0-20251118045524-e76f2b15b3b0/go.mod h1:fDjSJFXd2PoPiOod6qKRGVjurABW3IuMERwuqyUf3u0=
+github.com/anhvanhoa/sf-proto v0.0.0-20251118081448-0955b27e9036 h1:TVHqMzaomnCrGtQ4vcpe8hhx1GfrJermHVzwryy4Pns=
+github.com/anhvanhoa/sf-proto v0.0.0-20251118081448-0955b27e9036/go.mod h1:fDjSJFXd2PoPiOod6qKRGVjurABW3IuMERwuqyUf3u0=
+github.com/anhvanhoa/sf-proto v0.0.0-20251118084251-a6d14541035e h1:oYbNVV5pRcsJwTwlYKbX/NLVlL7Xn/xG/xDSarm3G/w=
+github.com/anhvanhoa/sf-proto v0.0.0-20251118084251-a6d14541035e/go.mod h1:fDjSJFXd2PoPiOod6qKRGVjurABW3IuMERwuqyUf3u0=
+github.com/anhvanhoa/sf-proto v0.0.0-20251119012305-5f108a168386 h1:V4/jcpGHzXjNZ9bGWP/5xATNlED/uzPovkUn/f10XiE=
+github.com/anhvanhoa/sf-proto v0.0.0-20251119012305-5f108a168386/go.mod h1:fDjSJFXd2PoPiOod6qKRGVjurABW3IuMERwuqyUf3u0=
 github.com/bytedance/sonic v1.14.0 h1:/OfKt8HFw0kh2rj8N0F6C/qPGRESq0BbaNZgcNXXzQQ=
 github.com/bytedance/sonic v1.14.0/go.mod h1:WoEbx8WTcFJfzCe0hbmyTGrfjt8PzNEBdxlNUO24NhA=
 github.com/bytedance/sonic/loader v0.3.0 h1:dskwH8edlzNMctoruo8FPTJDF3vLtDT0sXZwvZJyqeA=

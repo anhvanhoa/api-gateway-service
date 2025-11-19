@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/anhvanhoa/service-core v0.0.0-20251117034728-3b47100ea7b6
-	github.com/anhvanhoa/sf-proto v0.0.0-20251117123950-68268c47b51a
+	github.com/anhvanhoa/sf-proto v0.0.0-20251119012305-5f108a168386
 	github.com/gin-contrib/cors v1.7.6
 	github.com/gin-gonic/gin v1.11.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
